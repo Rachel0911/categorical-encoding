@@ -107,9 +107,9 @@ enc = TargetEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
 training_numeric_dataset = enc.transform(X_train, y_train)
 testing_numeric_dataset = enc.transform(X_test)
 ```
-Saving encoder state(it is useful for real world project, since no y(target) and we need to use
+Saving encoder state(it is useful for real world project, since no y(target) and we need to use train's fit scaler to transform test dataset)
 --------------------
-train's fit scale to transform test dataset)
+
 ```python
 import category_encoders as ce
 enc = ce.WOEEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
