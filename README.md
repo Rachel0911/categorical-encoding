@@ -6,7 +6,7 @@ Categorical Encoding Methods
 [![CircleCI Status](https://circleci.com/gh/scikit-learn-contrib/categorical-encoding.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/scikit-learn-contrib/categorical-encoding/tree/master)
 [![DOI](https://zenodo.org/badge/47077067.svg)](https://zenodo.org/badge/latestdoi/47077067)
 
-A set of scikit-learn-style transformers for encoding categorical 
+A set of scikit-learn-style transformers for encoding categorical
 variables into numeric by means of different techniques.
 
 Important Links
@@ -44,7 +44,7 @@ To install the package, execute:
 $ python setup.py install
 ```
 
-or 
+or
 
 ```shell
 pip install category_encoders
@@ -107,6 +107,20 @@ enc = TargetEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
 training_numeric_dataset = enc.transform(X_train, y_train)
 testing_numeric_dataset = enc.transform(X_test)
 ```
+Saving encoder state(it is useful for real world project, since no y(target) and we need to use
+--------------------
+train's fit scale to transform test dataset)
+```python
+import category_encoders as ce
+enc = ce.WOEEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
+enc.save_as_object_file("WOE")
+
+enc = ce.WOEEncoder(cols=['CHAS', 'RAD'])
+enc.load_from_object_file("/WOE")
+
+# transform test dataset
+X = enc.transform(X_new)
+```
 
 Additional examples and benchmarks can be found in the `examples` directory.
 
@@ -129,4 +143,3 @@ References:
  8. Weight of Evidence (WOE) and Information Value Explained. From https://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html
  9. Empirical Bayes for multiple sample sizes. From http://chris-said.io/2017/05/03/empirical-bayes-for-multiple-sample-sizes/
  10. Simple Count or Frequency Encoding. https://www.datacamp.com/community/tutorials/encoding-methodologies
- 
