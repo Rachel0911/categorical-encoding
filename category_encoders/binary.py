@@ -153,3 +153,10 @@ class BinaryEncoder(BaseEstimator, TransformerMixin):
         """
 
         return self.base_n_encoder.get_feature_names()
+
+    def save_as_object_file(self, path):
+        pickle.dump(self.__dict__, open(path, 'wb'))
+
+    def load_from_object_file(self, path):
+        for k, v in pickle.load(open(path, 'rb')).items():
+            setattr(self, k, v)

@@ -138,7 +138,7 @@ class TargetEncoder(BaseEstimator, TransformerMixin):
         self.ordinal_encoder = self.ordinal_encoder.fit(X)
         X_ordinal = self.ordinal_encoder.transform(X)
         self.mapping = self.fit_target_encoding(X_ordinal, y)
-        
+
         X_temp = self.transform(X, override_return_df=True)
         self.feature_names = list(X_temp.columns)
 
@@ -193,7 +193,7 @@ class TargetEncoder(BaseEstimator, TransformerMixin):
         X : array-like, shape = [n_samples, n_features]
         y : array-like, shape = [n_samples] when transform by leave one out
             None, when transform without target info (such as transform test set)
-            
+
         Returns
         -------
         p : array, shape = [n_samples, n_numeric + N]
@@ -274,3 +274,10 @@ class TargetEncoder(BaseEstimator, TransformerMixin):
             raise ValueError('Must fit data first. Affected feature names are not known before.')
         else:
             return self.feature_names
+
+    def save_as_object_file(self, path):
+        pickle.dump(self.__dict__, open(path, 'wb'))
+
+    def load_from_object_file(self, path):
+        for k, v in pickle.load(open(path, 'rb')).items():
+            setattr(self, k, v)

@@ -57,7 +57,7 @@ class CountEncoder(BaseEstimator, TransformerMixin):
             Set the name of the combined minimum groups when the defaults become
             too long. Default None. In this case the category names will be joined
             alphabetically with a `_` delimiter.
-            Note: The default name can be long ae may keep changing, for example, 
+            Note: The default name can be long ae may keep changing, for example,
             in cross-validation.
         combine_min_nan_groups: bool or dict of.
             whether to combine the leftovers group with NaN group. Default True. Can
@@ -176,7 +176,7 @@ class CountEncoder(BaseEstimator, TransformerMixin):
         ----------
         X : array-like, shape = [n_samples, n_features]
         y : array-like, shape = [n_samples]
-            
+
         Returns
         -------
         p : array, shape = [n_samples, n_numeric + N]
@@ -347,7 +347,7 @@ class CountEncoder(BaseEstimator, TransformerMixin):
                 "Cannot have `handle_missing` == 'return_nan' and "
                 "'combine_min_nan_groups' == 'force' for all columns."
             )
-        
+
         if (
             self.combine_min_nan_groups is not None
             and self.min_group_size is None
@@ -403,7 +403,7 @@ class CountEncoder(BaseEstimator, TransformerMixin):
                     "'combine_min_nan_groups' == 'force' for columns `%s`."
                     % (col,)
                 )
-            
+
             if (
                 self._combine_min_nan_groups[col] is not True
                 and self._min_group_size[col] is None
@@ -423,3 +423,10 @@ class CountEncoder(BaseEstimator, TransformerMixin):
                     "is set for column %s."
                     % (col,)
                 )
+
+    def save_as_object_file(self, path):
+        pickle.dump(self.__dict__, open(path, 'wb'))
+
+    def load_from_object_file(self, path):
+        for k, v in pickle.load(open(path, 'rb')).items():
+            setattr(self, k, v)

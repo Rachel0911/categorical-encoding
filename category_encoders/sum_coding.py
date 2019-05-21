@@ -290,3 +290,10 @@ class SumEncoder(BaseEstimator, TransformerMixin):
             raise ValueError("Estimator has to be fitted to return feature names.")
         else:
             return self.feature_names
+
+    def save_as_object_file(self, path):
+        pickle.dump(self.__dict__, open(path, 'wb'))
+
+    def load_from_object_file(self, path):
+        for k, v in pickle.load(open(path, 'rb')).items():
+            setattr(self, k, v)

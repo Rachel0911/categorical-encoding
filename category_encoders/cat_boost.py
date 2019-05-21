@@ -324,3 +324,10 @@ class CatBoostEncoder(BaseEstimator, TransformerMixin):
             raise ValueError('Must fit data first. Affected feature names are not known before.')
         else:
             return self.feature_names
+
+    def save_as_object_file(self, path):
+        pickle.dump(self.__dict__, open(path, 'wb'))
+
+    def load_from_object_file(self, path):
+        for k, v in pickle.load(open(path, 'rb')).items():
+            setattr(self, k, v)
