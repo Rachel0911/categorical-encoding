@@ -116,7 +116,7 @@ enc = ce.WOEEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
 enc.save_as_object_file("WOE")
 
 enc = ce.WOEEncoder(cols=['CHAS', 'RAD'])
-enc.load_from_object_file("/WOE")
+enc.load_from_object_file("WOE")
 
 # transform test dataset
 X = enc.transform(X_new)
