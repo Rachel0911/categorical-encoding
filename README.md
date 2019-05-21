@@ -112,10 +112,11 @@ Saving encoder state(it is useful for real world project, REASON: 1.no y(target)
 
 ```python
 import category_encoders as ce
-enc = ce.WOEEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
-enc.save_as_object_file("WOE")
-
-enc = ce.WOEEncoder(cols=['CHAS', 'RAD'])
+if train:
+   enc = ce.WOEEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
+   enc.save_as_object_file("WOE")
+else:
+   enc = ce.WOEEncoder(cols=['CHAS', 'RAD'])
 enc.load_from_object_file("WOE")
 
 # transform test dataset
