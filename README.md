@@ -107,7 +107,7 @@ enc = TargetEncoder(cols=['CHAS', 'RAD']).fit(X_train, y_train)
 training_numeric_dataset = enc.transform(X_train, y_train)
 testing_numeric_dataset = enc.transform(X_test)
 ```
-Saving encoder state(it is useful for real world project, since no y(target) and we need to use train's fit scaler to transform test dataset)
+Saving encoder state(it is useful for real world project, REASON: 1.no y(target), 2.use train's fit scaler to transform feature unknown dataset)
 --------------------
 
 ```python
