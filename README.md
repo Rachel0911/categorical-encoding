@@ -144,3 +144,4 @@ References:
  8. Weight of Evidence (WOE) and Information Value Explained. From https://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html
  9. Empirical Bayes for multiple sample sizes. From http://chris-said.io/2017/05/03/empirical-bayes-for-multiple-sample-sizes/
  10. Simple Count or Frequency Encoding. https://www.datacamp.com/community/tutorials/encoding-methodologies
+ 11. ML Encoders. https://github.com/tcassou/mlencoders
